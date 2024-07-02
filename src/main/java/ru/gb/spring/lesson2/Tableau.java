@@ -15,7 +15,7 @@ public class Tableau {
     TicketNumberGenerator generator;
 
     public Tableau() {
-        System.out.println("Конструктор Tableau");
+        System.out.println("Конструктор Tableau отработал");
     }
 
     @RequestMapping("/ticket")

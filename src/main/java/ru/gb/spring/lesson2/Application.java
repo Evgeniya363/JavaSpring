@@ -21,7 +21,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * 2.1. String number - номер тикета
  * 2.2. LocalDateTime createdAt - дата создания
  * 2.3. ... (любые другие поля)
- * <p>
+ *
  * Класс "Табло" - бин (синглтон), у которого есть поле ticketNumberGenerator
  * и метод метод newTicket(), который создает объетк класса Ticket с значениями полей:
  * 3.1 number - результат вызова TicketNumberGenerator#createNewNumber

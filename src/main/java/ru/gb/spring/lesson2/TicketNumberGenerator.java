@@ -10,7 +10,7 @@ import java.util.UUID;
 @Scope("singleton")
 public class TicketNumberGenerator {
     public TicketNumberGenerator() {
-        System.out.println("Конструктор TicketNumberGenerator");
+        System.out.println("Конструктор TicketNumberGenerator отработал");
     }
     public String createNewNumber() {
         return "Ticket #" + UUID.randomUUID();
