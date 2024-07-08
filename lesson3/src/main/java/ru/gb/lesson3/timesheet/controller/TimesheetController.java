@@ -80,20 +80,20 @@ public class TimesheetController {
      *       Аналогично createdAtBefore
      */
 
+    // localhost:8080/timesheets/after-date?date=2020-01-01
     @GetMapping("/after-date")
-    public ResponseEntity<List<Timesheet>> getAllCreatedAtAfter(
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-        LocalDateTime ldt = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-        List<Timesheet> list = service.getTimesheetsAfterDate(ldt);
+    public ResponseEntity<List<Timesheet>> getAllCreatedAtAfter(@RequestParam LocalDate date) {
+        List<Timesheet> list = service.getTimesheetsAfterDate(date.atTime(0, 0));
+        if (list.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.status(HttpStatus.OK).body(list);
 
     }
 
+    // localhost:8080/timesheets/before-date?date=2025-01-01
     @GetMapping("/before-date")
-    public ResponseEntity<List<Timesheet>> getAllCreatedAtBefore(
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-        LocalDateTime ldt = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-        List<Timesheet> list = service.getTimesheetsBeforeDate(ldt);
+    public ResponseEntity<List<Timesheet>> getAllCreatedAtBefore(@RequestParam LocalDate date) {
+        List<Timesheet> list = service.getTimesheetsBeforeDate(date.atTime(0, 0));
+        if (list.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.status(HttpStatus.OK).body(list);
 
     }
