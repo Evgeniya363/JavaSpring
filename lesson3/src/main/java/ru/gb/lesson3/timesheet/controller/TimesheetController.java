@@ -9,6 +9,7 @@ import ru.gb.lesson3.timesheet.service.TimesheetService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -78,12 +79,12 @@ public class TimesheetController {
      *       - ручка для получения всех таймшитов, которые созданы ПОСЛЕ указанного параметра.
      *       Аналогично createdAtBefore
      */
+
     @GetMapping("/after-date")
     public ResponseEntity<List<Timesheet>> getAllCreatedAtAfter(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-
-        System.out.println(date);
-        List<Timesheet> list = service.getTimesheetsAfterDate(now());
+        LocalDateTime ldt = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        List<Timesheet> list = service.getTimesheetsAfterDate(ldt);
         return ResponseEntity.status(HttpStatus.OK).body(list);
 
     }
@@ -91,10 +92,11 @@ public class TimesheetController {
     @GetMapping("/before-date")
     public ResponseEntity<List<Timesheet>> getAllCreatedAtBefore(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-        System.out.println(date);
-        List<Timesheet> list = service.getTimesheetsBeforeDate(now());
+        LocalDateTime ldt = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        List<Timesheet> list = service.getTimesheetsBeforeDate(ldt);
         return ResponseEntity.status(HttpStatus.OK).body(list);
 
     }
+
 
 }
