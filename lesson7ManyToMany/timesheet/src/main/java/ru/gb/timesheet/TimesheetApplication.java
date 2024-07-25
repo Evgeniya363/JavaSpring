@@ -18,12 +18,15 @@ public class TimesheetApplication {
         RoleRepository roleRepository = ctx.getBean(RoleRepository.class);
         Role roleAdmins = new Role();
         roleAdmins.setName(RoleEnum.ADMIN.getName());
+        roleRepository.save(roleAdmins);
 
         Role roleUsers = new Role();
         roleUsers.setName(RoleEnum.USER.getName());
+        roleRepository.save(roleUsers);
 
-        Role roleRests = new Role();
-        roleUsers.setName(RoleEnum.REST.getName());
+        Role roleRest = new Role();
+        roleRest.setName(RoleEnum.REST.getName());
+        roleRepository.save(roleRest);
 
         UserRepository userRepository = ctx.getBean(UserRepository.class);
         User user = new User();
@@ -32,27 +35,27 @@ public class TimesheetApplication {
 
         user.getRoles().add(roleUsers);
         roleUsers.getUsers().add(user);
+        userRepository.save(user);
 
         User admin = new User();
         admin.setLogin("admin"); // admin
         admin.setPassword("$2a$12$QPoOV5Qr8sRD5lkcugid8ezyLwZmcFt2j0kh6XLsPf/IgkmLxe5SK");
-
-        User rest = new User();
-        rest.setLogin("rest"); // user
-        rest.setPassword("$2a$12$tZaB13uZJJkD9zgpSiwZXeeYtOY/vjDR9XQwm2woqGHpmxhQXeTYq");
-
         admin.getRoles().add(roleUsers);
         admin.getRoles().add(roleAdmins);
         roleUsers.getUsers().add(admin);
         roleAdmins.getUsers().add(admin);
-
-        roleRepository.save(roleUsers);
-        roleRepository.save(roleAdmins);
-        userRepository.save(user);
         userRepository.save(admin);
 
-        System.out.println(userRepository.findUserRolesByUserId(2L));
-        System.out.println(userRepository.findByLogin("user"));
+        User rest = new User();
+        rest.setLogin("rest"); // rest
+        rest.setPassword("$2a$12$tZaB13uZJJkD9zgpSiwZXeeYtOY/vjDR9XQwm2woqGHpmxhQXeTYq");
+        rest.getRoles().add(roleRest);
+        roleUsers.getUsers().add(rest);
+        userRepository.save(rest);
+
+
+        System.out.println(userRepository.findUserRolesByUserId(3L));
+        System.out.println(userRepository.findByLogin("rest"));
 
 
         EmployeeRepository employeeRepo = ctx.getBean(EmployeeRepository.class);
