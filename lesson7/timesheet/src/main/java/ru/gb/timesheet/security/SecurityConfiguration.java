@@ -7,6 +7,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -33,30 +34,24 @@ import ru.gb.timesheet.repository.UserRepository;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
+    @Bean
+    GrantedAuthorityDefaults grantedAuthorityDefaults() {
+        return new GrantedAuthorityDefaults("");
+    }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/home/timesheets/**").hasAuthority("user")
-                        .requestMatchers("/home/projects/**").hasAuthority("admin")
-                        .requestMatchers("/projects/**").hasAuthority("rest")
-                        .requestMatchers("/timesheets/**").hasAuthority("rest")
-                        .requestMatchers("/employees/**").hasAuthority("rest")
+                        .requestMatchers("/home/timesheets/**").hasRole("user")
+                        .requestMatchers("/home/projects/**").hasRole("admin")
+                        .requestMatchers("/projects/**").hasRole("rest")
+                        .requestMatchers("/timesheets/**").hasRole("rest")
+                        .requestMatchers("/employees/**").hasRole("rest")
                         .anyRequest().denyAll()
                 )
                 .formLogin(Customizer.withDefaults())
                 .build();
-//        return http
-//                .authorizeHttpRequests(requests -> requests
-//                                .requestMatchers("/home/projects/**").hasRole("admin")
-//                                .requestMatchers("/home/timesheets/**").hasRole("user")
-//                                .requestMatchers("/timesheets/**").hasRole("rest")
-//                                .requestMatchers("/projects/**").hasRole("rest")
-//                                .requestMatchers("/employees/**").hasRole("rest")
-//                )
-//                .formLogin(Customizer.withDefaults())
-//                .build();
     }
 
     @Bean
