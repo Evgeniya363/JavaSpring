@@ -54,8 +54,8 @@ public class TimesheetApplication {
         userRepository.save(rest);
 
 
-        System.out.println(userRepository.findUserRolesByUserId(3L));
-        System.out.println(userRepository.findByLogin("rest"));
+//        System.out.println(userRepository.findUserRolesByUserId(3L));
+//        System.out.println(userRepository.findByLogin("rest"));
 
 
         EmployeeRepository employeeRepo = ctx.getBean(EmployeeRepository.class);

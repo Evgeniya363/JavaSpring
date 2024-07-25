@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -27,6 +29,8 @@ import ru.gb.timesheet.repository.UserRepository;
  */
 
 @Configuration
+@EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
 
 
@@ -34,9 +38,7 @@ public class SecurityConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-                        //          .requestMatchers("/home/projects/**").hasAuthority(Role.ADMIN.getName())
-                        //        .requestMatchers("/home/projects/**").hasRole("admin") // MY_ROLE_PREFIX_admin
-                        .requestMatchers("/home/timesheets/**").hasAnyAuthority("user")
+                        .requestMatchers("/home/timesheets/**").hasAuthority("user")
                         .requestMatchers("/home/projects/**").hasAuthority("admin")
                         .requestMatchers("/projects/**").hasAuthority("rest")
                         .requestMatchers("/timesheets/**").hasAuthority("rest")
