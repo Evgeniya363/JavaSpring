@@ -36,11 +36,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(requests -> requests
                         //          .requestMatchers("/home/projects/**").hasAuthority(Role.ADMIN.getName())
                         //        .requestMatchers("/home/projects/**").hasRole("admin") // MY_ROLE_PREFIX_admin
-                        .requestMatchers("/home/timesheets/**").hasAuthority(RoleEnum.USER.getName())
-                        .requestMatchers("/home/projects/**").hasAuthority(RoleEnum.ADMIN.getName())
-                        .requestMatchers("/projects/**").hasAuthority(RoleEnum.REST.getName())
-                        .requestMatchers("/timesheets/**").hasAuthority(RoleEnum.REST.getName())
-                        .requestMatchers("/employees/**").hasAuthority(RoleEnum.REST.getName())
+                        .requestMatchers("/home/timesheets/**").hasAnyAuthority("user")
+                        .requestMatchers("/home/projects/**").hasAuthority("admin")
+                        .requestMatchers("/projects/**").hasAuthority("rest")
+                        .requestMatchers("/timesheets/**").hasAuthority("rest")
+                        .requestMatchers("/employees/**").hasAuthority("rest")
                         .anyRequest().denyAll()
                 )
                 .formLogin(Customizer.withDefaults())

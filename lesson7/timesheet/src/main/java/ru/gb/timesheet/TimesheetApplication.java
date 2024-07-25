@@ -17,15 +17,15 @@ public class TimesheetApplication {
 
         RoleRepository roleRepository = ctx.getBean(RoleRepository.class);
         Role roleAdmins = new Role();
-        roleAdmins.setName(RoleEnum.ADMIN.getName());
+        roleAdmins.setName("admin");
         roleRepository.save(roleAdmins);
 
         Role roleUsers = new Role();
-        roleUsers.setName(RoleEnum.USER.getName());
+        roleUsers.setName("user");
         roleRepository.save(roleUsers);
 
         Role roleRest = new Role();
-        roleRest.setName(RoleEnum.REST.getName());
+        roleRest.setName("rest");
         roleRepository.save(roleRest);
 
         UserRepository userRepository = ctx.getBean(UserRepository.class);
