@@ -1,25 +1,11 @@
-﻿## Задание к 8-му семинару
+﻿## Протестировать TimesheetController
 
-1. В LoggingAspect добавить логирование типов и значений аргументов.
-Например (пример вывода): TimesheetService.findById(Long = 3)
-Эту информацию можно достать из joinPoint.getArgs()
+1. GET /timesheets/{id}
 
-Далее не реализовано:
+2. GET /timesheets
 
-2. Создать аспект, который аспектирует методы, помеченные аннотацией Recover, и делает следующее:
+3. POST /timesheets
 
-2.1 Если в процессе исполнения метода был exception (любой), 
-то его нужно залогировать ("Recovering TimesheetService#findById after Exception[RuntimeException.class, "exception message"]")
-и вернуть default-значение наружу Default-значение: для примитивов значение по умолчанию, для ссылочных типов - null.
-Для void-методов возвращать не нужно.
-   
-3. **** В аннотацию Recover добавить атрибут Class<?>[] noRecoverFor, в которое можно записать список классов исключений,
-которые НЕ нужно отлавливать.
+4. DELETE /timesheets
 
-Это вхождение должно учитывать иерархию классов.
-   
-Пример:
-
-@Recover(noRecoverFor = {NoSuchElementException.class, IllegalStateException.class})
-public Timesheet getById(Long id) {...}
-   
+5. PUT /timesheets/{id}
