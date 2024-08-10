@@ -20,7 +20,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/timesheets")
 @Tag(name = "Timesheets", description = "API для работы с задачами")
-@Recover
 public class TimesheetController {
 
     // GET - получить - не содержит тела
