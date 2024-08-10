@@ -1,12 +1,15 @@
 package ru.gb.timesheet;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import ru.gb.timesheet.aspect.RecoverAspectTest;
 import ru.gb.timesheet.model.*;
 import ru.gb.timesheet.repository.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
@@ -15,10 +18,11 @@ public class TimesheetApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(TimesheetApplication.class, args);
 
-        // TestRecove
-//        TestRecove testRecove = ctx.getBean(TestRecove.class);
-//        testRecove.testMethod();
-
+        // RecoverAspect test
+        RecoverAspectTest recoverTest = ctx.getBean(RecoverAspectTest.class);
+        System.out.println("Recover test for Integer.class. Return value: " + recoverTest.getIntegerValue());
+        System.out.println("Recover test for int primitive. Return value: " + recoverTest.getIntValue());
+        System.out.println("Recover test for Optional<>.class. Return value: " + recoverTest.getOptionalValue());
 
         RoleRepository roleRepository = ctx.getBean(RoleRepository.class);
         Role roleAdmins = new Role();
