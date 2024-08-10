@@ -10,7 +10,8 @@ public class LoggingProperties {
 
 //    private LoggingLevel level; // Без Enum LoggingLevel
     private Level level = Level.DEBUG;
-    //print-args
+    //
+//    @Value("${print-args}")
     private boolean printArgs = true;
 
 }

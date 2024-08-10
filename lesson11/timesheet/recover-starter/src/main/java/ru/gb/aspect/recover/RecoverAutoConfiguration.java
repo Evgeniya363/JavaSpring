@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties(RecoverProperties.class)
-@ConditionalOnProperty(value = "application.logging.enabled", havingValue = "true")
+@ConditionalOnProperty(value = "application.recover.enabled", havingValue = "true")
 public class RecoverAutoConfiguration {
 
     @Bean

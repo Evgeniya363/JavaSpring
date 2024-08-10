@@ -4,13 +4,13 @@ import lombok.Data;
 import org.slf4j.event.Level;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("application.logging")
+import java.util.ArrayList;
+import java.util.List;
+
+@ConfigurationProperties("application.recover")
 @Data
 public class RecoverProperties {
 
-//    private LoggingLevel level; // Без Enum LoggingLevel
-    private Level level = Level.DEBUG;
-    //print-args
-    private boolean printArgs = true;
+    List<String> noRecoverFor = new ArrayList<>();
 
 }
